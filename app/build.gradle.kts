@@ -71,7 +71,7 @@ dependencies {
     kapt(libs.androidx.room.compiler)
 
     // Animation library
-    implementation(libs.lottie)
-
+    implementation(libs.lottie) //lottie
+    implementation(libs.android.gif.drawable) //gif
 
 }
