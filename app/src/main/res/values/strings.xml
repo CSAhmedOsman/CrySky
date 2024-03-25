@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">CrySky</string>
+    <string name="location">Location</string>
+    <string name="map">Map</string>
+    <string name="gps">GPS</string>
+    <string name="save">SAVE</string>
+    <string name="cancel">CANCEL</string>
+    <string name="retry">ReTry</string>
+    <string name="failed_load_data">Failed to Load the Data, please check your network connection.</string>
+    <string name="city_name">CityName</string>
+    <string name="change_location">Change Location</string>
+    <string name="current">Current Weather</string>
+    <string name="pressure">Pressure</string>
+    <string name="humidity">Humidity</string>
+    <string name="wind">Wind</string>
+    <string name="cloud">Cloud</string>
+    <string name="ultra_violet">Ultra Violet</string>
+    <string name="visibility">Visibility</string>
+    <string name="next_days">Next 5 Days</string>
+    <string name="next_hours">Hourly Forecast</string>
+    <string name="splash_image">Splash Image</string>
+
+</resources>
