@@ -4,7 +4,7 @@
     <string name="map">Map</string>
     <string name="gps">GPS</string>
     <string name="save">SAVE</string>
-    <string name="cancel">CANCEL</string>
+    <string name="cancel">Cancel</string>
     <string name="retry">ReTry</string>
     <string name="failed_load_data">Failed to Load the Data, please check your network connection.</string>
     <string name="city_name">CityName</string>

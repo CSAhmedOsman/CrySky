@@ -36,9 +36,9 @@ data class WeatherResponseEntity(
     val visibility: Int = 0,
     val pop: Double = 0.0,
 //    val rain: RainInfo? = null,
-    val `RainInfo3h`: Double = 0.0,
+    val RainInfo3h: Double = 0.0,
 //    val snow: Snow? = null,
-    val `Snow3h`: Double = 0.0,
+    val Snow3h: Double = 0.0,
 //    val sys: Sys = Sys(),
     val pod: String = "",
     val dt_txt: String = "",
@@ -70,6 +70,22 @@ data class WeatherResponse(
     val cnt: Int = 0,
     val list: List<WeatherData> = emptyList(),
     val city: City = City(),
+)
+
+data class CurrentWeatherResponse(
+    val coord: Coord,
+    val weather: List<Weather>,
+    val base: String,
+    val main: Main,
+    val visibility: Int,
+    val wind: Wind,
+    val clouds: Clouds,
+    val dt: Long,
+    val sys: Sys,
+    val timezone: Int,
+    val id: Long,
+    val name: String,
+    val cod: Int,
 )
 
 data class WeatherData(
@@ -125,6 +141,11 @@ data class Snow(
 
 data class Sys(
     val pod: String = "",
+    val type: Int = 0,
+    val id: Int = 0,
+    val country: String = "",
+    val sunrise: Long = 0,
+    val sunset: Long = 0,
 )
 
 data class City(

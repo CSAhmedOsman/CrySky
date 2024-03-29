@@ -1,6 +1,5 @@
 package app.harbi.crysky.model.local
 
-import app.harbi.crysky.model.WeatherResponse
 import app.harbi.crysky.model.WeatherResponseEntity
 import kotlinx.coroutines.flow.Flow
 

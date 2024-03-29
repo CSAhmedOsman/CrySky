@@ -17,6 +17,15 @@ interface WeatherService {
         @Query("units") units: String = "metric",
         @Query("lang") language: String = "ar",
     ): Response<WeatherResponse>
+
+    @GET("weather") // Endpoint for current weather
+    suspend fun getCurrentWeather(
+        @Query("lat") latitude: Double = 29.95,
+        @Query("lon") longitude: Double = 31.54,
+        @Query("appid") apiKey: String = Constants.API_KEY.value,
+        @Query("units") units: String = "metric",
+        @Query("lang") language: String = "ar",
+    ): Response<WeatherResponse>
 }
 
 interface CityService {
