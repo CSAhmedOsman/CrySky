@@ -19,5 +19,9 @@
     <string name="next_days">Next 5 Days</string>
     <string name="next_hours">Hourly Forecast</string>
     <string name="splash_image">Splash Image</string>
+    <string name="home">Home</string>
+    <string name="favorite">Favorites</string>
+    <string name="alert">Alert</string>
+    <string name="setting">Settings</string>
 
 </resources>

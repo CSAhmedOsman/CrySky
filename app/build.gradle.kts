@@ -48,6 +48,9 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -65,6 +68,9 @@ dependencies {
     implementation(libs.glide)
     annotationProcessor(libs.compiler)
 
+    //Picasso
+    implementation(libs.picasso)
+
     //Room
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.runtime)
@@ -73,5 +79,17 @@ dependencies {
     // Animation library
     implementation(libs.lottie) //lottie
     implementation(libs.android.gif.drawable) //gif
+
+    //Coroutine
+    implementation(libs.kotlinx.coroutines.android)
+
+    //ViewModel
+    implementation(libs.androidx.lifecycle.extensions)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
+    //Koin for Android
+    implementation(libs.koin.android)
+
 
 }
