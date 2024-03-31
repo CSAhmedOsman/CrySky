@@ -1,12 +1,15 @@
 <resources>
-    <string name="app_name">CrySky</string>
+    <string name="app_name" translatable="false">CrySky</string>
+
+    <string name="map_api_key" translatable="false">AIzaSyD-Y9_uxZVLbUE66Es9xsn8pJERBMryxHw</string>
+
     <string name="location">Location</string>
     <string name="map">Map</string>
     <string name="gps">GPS</string>
     <string name="save">SAVE</string>
     <string name="cancel">Cancel</string>
     <string name="retry">ReTry</string>
-    <string name="failed_load_data">Failed to Load the Data, please check your network connection.</string>
+    <string name="failed_load_data">Failed to Load the Data,\nplease check your network connection.</string>
     <string name="city_name">CityName</string>
     <string name="change_location">Change Location</string>
     <string name="current">Current Weather</string>
@@ -23,5 +26,20 @@
     <string name="favorite">Favorites</string>
     <string name="alert">Alert</string>
     <string name="setting">Settings</string>
+    <string name="search">Search</string>
+    <string name="add_fav">Add to Favorite</string>
+    <string name="kelvin">°K</string>
+    <string name="fahrenheit">°F</string>
+    <string name="celsius">°C</string>
+    <string name="meter_per_sec">meter/sec</string>
+    <string name="miles_per_hour">miles/hour</string>
+    <string name="meter">m</string>
+    <string name="units">Units</string>
+    <string name="standard">Kelvin - meters/second</string>
+    <string name="metric">Celsius - meters/second</string>
+    <string name="imperial">Fahrenheit - miles/hour</string>
+    <string name="language">Language</string>
+    <string name="arabic">Arabic</string>
+    <string name="english">English</string>
 
 </resources>

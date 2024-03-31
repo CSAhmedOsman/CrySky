@@ -91,5 +91,8 @@ dependencies {
     //Koin for Android
     implementation(libs.koin.android)
 
+    //Location
+    implementation(libs.play.services.location)
+    implementation(libs.play.services.maps)
 
 }

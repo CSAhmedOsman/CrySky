@@ -1,4 +1,4 @@
-package app.harbi.crysky.model
+package app.harbi.crysky.model.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -55,13 +55,14 @@ data class WeatherResponseEntity(
     val sunset: Long = 0,
 )
 
+@Entity(tableName = "city_response", primaryKeys = ["latitude", "longitude"])
 data class CityResponse(
-    val name: String,
-    val latitude: Double,
-    val longitude: Double,
-    val country: String,
-    val population: Int,
-    val isCapital: Boolean,
+    val name: String = " ",
+    val latitude: Double = 0.0,
+    val longitude: Double = 0.0,
+    val country: String = "",
+    val population: Int = 0,
+    val isCapital: Boolean = false,
 )
 
 data class WeatherResponse(

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="location">الموقع</string>
+    <string name="map">الخريطة</string>
+    <string name="gps">نظام تحديد المواقع</string>
+    <string name="save">حفظ</string>
+    <string name="cancel">إلغاء</string>
+    <string name="retry">إعادة المحاولة</string>
+    <string name="failed_load_data">فشل في تحميل البيانات،\nيرجى التحقق من اتصال الشبكة الخاص بك.</string>
+    <string name="city_name">اسم المدينة</string>
+    <string name="change_location">تغيير الموقع</string>
+    <string name="current">الطقس الحالي</string>
+    <string name="pressure">الضغط</string>
+    <string name="humidity">الرطوبة</string>
+    <string name="wind">الرياح</string>
+    <string name="cloud">السحب</string>
+    <string name="ultra_violet">الأشعة فوق البنفسجية</string>
+    <string name="visibility">الرؤية</string>
+    <string name="next_days">الأيام القادمة 5 أيام</string>
+    <string name="next_hours">التوقعات الساعية</string>
+    <string name="splash_image">صورة البداية</string>
+    <string name="home">الرئيسية</string>
+    <string name="favorite">المفضلة</string>
+    <string name="alert">تنبيه</string>
+    <string name="setting">الإعدادات</string>
+    <string name="search">بحث</string>
+    <string name="add_fav">أضف إلى المفضلة</string>
+    <string name="kelvin">°ك</string>
+    <string name="fahrenheit">°ف</string>
+    <string name="celsius">°م</string>
+    <string name="meter_per_sec">متر/ثانية</string>
+    <string name="miles_per_hour">ميل/ساعة</string>
+    <string name="meter">م</string>
+    <string name="units">الوحدات</string>
+    <string name="standard">كلفن - متر/ثانية</string>
+    <string name="metric">مئوية - متر/ثانية</string>
+    <string name="imperial">فهرنهايت - ميل/ساعة</string>
+    <string name="language">اللغة</string>
+    <string name="arabic">العربية</string>
+    <string name="english">الإنجليزية</string>
+
+</resources>

@@ -1,8 +1,8 @@
 package app.harbi.crysky.model.remote
 
-import app.harbi.crysky.Constants
-import app.harbi.crysky.model.CityResponse
-import app.harbi.crysky.model.WeatherResponse
+import app.harbi.crysky.model.Constants
+import app.harbi.crysky.model.data.CityResponse
+import app.harbi.crysky.model.data.WeatherResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -13,22 +13,23 @@ interface WeatherService {
     suspend fun getWeather(
         @Query("lat") latitude: Double = 29.95,
         @Query("lon") longitude: Double = 31.54,
-        @Query("appid") apiKey: String = Constants.API_KEY.value,
         @Query("units") units: String = "metric",
         @Query("lang") language: String = "ar",
+        @Query("appid") apiKey: String = Constants.WEATHER_API_KEY,
     ): Response<WeatherResponse>
 
     @GET("weather") // Endpoint for current weather
     suspend fun getCurrentWeather(
         @Query("lat") latitude: Double = 29.95,
         @Query("lon") longitude: Double = 31.54,
-        @Query("appid") apiKey: String = Constants.API_KEY.value,
         @Query("units") units: String = "metric",
         @Query("lang") language: String = "ar",
+        @Query("appid") apiKey: String = Constants.WEATHER_API_KEY,
     ): Response<WeatherResponse>
 }
 
 interface CityService {
+
     @Headers("X-Api-Key: 3wOLIQcmIyIscmugzgRSIw==CB1xnWodAvXqzQWu")
     @GET("/v1/city")
     suspend fun getCities(

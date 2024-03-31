@@ -7,7 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import app.harbi.crysky.databinding.ActivitySplashBinding
-import app.harbi.crysky.ui.MainActivity
+import app.harbi.crysky.ui.home.view.HomeActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -24,9 +24,9 @@ class SplashActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             delay(3000)
-            val view = Intent(this@SplashActivity, MainActivity::class.java)
-            view.setAction(Intent.ACTION_VIEW)
-            startActivity(view)
+            val intent = Intent(this@SplashActivity, HomeActivity::class.java)
+            intent.setAction(Intent.ACTION_VIEW)
+            startActivity(intent)
             finish()
         }
     }
