@@ -41,5 +41,9 @@
     <string name="language">Language</string>
     <string name="arabic">Arabic</string>
     <string name="english">English</string>
+    <string name="goto_home">Go To home</string>
+    <string name="delete_confirm">Are you sure you want to delete, %1$s!</string>
+    <string name="delete">Delete</string>
+    <string name="weatherDisc">Weather conditions in, %1$s!</string>
 
 </resources>

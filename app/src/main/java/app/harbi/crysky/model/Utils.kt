@@ -1,5 +1,6 @@
 package app.harbi.crysky.model
 
+import android.content.SharedPreferences
 import android.widget.ImageView
 import app.harbi.crysky.R
 import app.harbi.crysky.model.data.City
@@ -89,8 +90,22 @@ object Constants {
     const val ENGLISH = "en"
     const val ARABIC = "ar"
 
+    //City
+    const val FAV = "fav"
+    const val ALERT = "alert"
+
 }
 
+fun <T> getSavedPreferences(
+    preferences: SharedPreferences, key: String, defaultValue: T,
+): T {
+    val result = preferences.getString(key, defaultValue.toString()) ?: defaultValue.toString()
+    return when (defaultValue) {
+        is Int -> result.toInt() as T
+        is Double -> result.toDouble() as T
+        else -> result as T
+    }
+}
 
 fun combineMaxMinWeatherData(max: WeatherData, min: WeatherData) =
     WeatherData(

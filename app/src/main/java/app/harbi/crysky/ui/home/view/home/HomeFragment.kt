@@ -1,24 +1,37 @@
 package app.harbi.crysky.ui.home.view.home
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import app.harbi.crysky.R
 import app.harbi.crysky.databinding.FragmentHomeBinding
 import app.harbi.crysky.model.Constants
 import app.harbi.crysky.model.combineMaxMinWeatherData
+import app.harbi.crysky.model.data.CityResponse
 import app.harbi.crysky.model.data.ResponseStatus
 import app.harbi.crysky.model.data.WeatherResponse
+import app.harbi.crysky.model.getFlagEmoji
+import app.harbi.crysky.model.getSavedPreferences
 import app.harbi.crysky.model.loadImage
 import app.harbi.crysky.ui.home.viewmodel.HomeViewModel
 import app.harbi.crysky.ui.search.view.SearchActivity
-import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.toList
@@ -29,11 +42,16 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
+    private val LOCATION_PERMISSION_ID: Int = 5005
+    private lateinit var fusedClient: FusedLocationProviderClient
+    private lateinit var locationCallback: LocationCallback
     private val viewModel: HomeViewModel by viewModel()
     private val hourAdapter: HourAdapter by lazy { HourAdapter { resId -> getString(resId) } }
     private val dayAdapter: DayAdapter by lazy { DayAdapter { resId -> getString(resId) } }
     private lateinit var units: String
     private lateinit var language: String
+    private lateinit var locationPreferences: SharedPreferences
+    private lateinit var city: CityResponse
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,21 +66,22 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val locationPreferences =
+        fusedClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+
+        locationPreferences =
             requireActivity().getSharedPreferences(Constants.LOCATION, Context.MODE_PRIVATE)
 
-        val latLng = LatLng(
-            locationPreferences.getString(Constants.LATITUDE, "0.0")?.toDouble() ?: 0.0,
-            locationPreferences.getString(Constants.LONGITUDE, "0.0")?.toDouble() ?: 0.0
+        city = CityResponse(
+            latitude = getSavedPreferences(locationPreferences, Constants.LATITUDE, 0.0),
+            longitude = getSavedPreferences(locationPreferences, Constants.LONGITUDE, 0.0)
         )
 
         val settingsPreferences = requireActivity().getSharedPreferences(
             Constants.SETTINGS_PREFERENCES, Context.MODE_PRIVATE
         )
 
-        units = settingsPreferences.getString(Constants.UNITS, Constants.METRIC) ?: Constants.METRIC
-        language = settingsPreferences.getString(Constants.LANGUAGE, Constants.ENGLISH)
-            ?: Constants.ENGLISH
+        units = getSavedPreferences(settingsPreferences, Constants.UNITS, Constants.METRIC)
+        language = getSavedPreferences(settingsPreferences, Constants.LANGUAGE, Constants.ENGLISH)
 
         binding.rvHourly.adapter = hourAdapter
 
@@ -94,13 +113,57 @@ class HomeFragment : Fragment() {
             }
         }
 
-        binding.btnLocation.setOnClickListener {
+        binding.btnSearch.setOnClickListener {
             val intent = Intent(requireContext(), SearchActivity::class.java)
             intent.setAction(Intent.ACTION_VIEW)
             startActivity(intent)
         }
 
-        viewModel.getWeather(latLng, units, language)
+        binding.btnLocation.setOnClickListener {
+            if (checkPermission()) {
+                updateLocation()
+            } else {
+                requestPermissions()
+            }
+        }
+
+        viewModel.getWeather(city, units, language)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        val city = CityResponse(
+            latitude = getSavedPreferences(locationPreferences, Constants.LATITUDE, 0.0),
+            longitude = getSavedPreferences(locationPreferences, Constants.LONGITUDE, 0.0)
+        )
+
+        if (city != this.city) {
+            this.city = city
+            viewModel.getWeather(city, units, language)
+        }
+
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult) {
+                val newCity = CityResponse(
+                    latitude = getSavedPreferences(locationPreferences, Constants.LATITUDE, 0.0),
+                    longitude = getSavedPreferences(locationPreferences, Constants.LONGITUDE, 0.0)
+                )
+
+                if (newCity != this@HomeFragment.city) {
+                    this@HomeFragment.city = newCity
+
+                    saveSetting(
+                        locationPreferences, Constants.LATITUDE, newCity.latitude.toString()
+                    )
+                    saveSetting(
+                        locationPreferences, Constants.LONGITUDE, newCity.longitude.toString()
+                    )
+
+                    viewModel.getWeather(newCity, units, language)
+                }
+            }
+        }
     }
 
     private fun updateUi(data: WeatherResponse) {
@@ -108,7 +171,8 @@ class HomeFragment : Fragment() {
         binding.wifiOffCard.visibility = View.GONE
         binding.page.visibility = View.VISIBLE
 
-        binding.tvCityName.text = data.city.name
+        binding.tvCityName.text =
+            String.format("${data.city.name}, ${data.city.country} ${getFlagEmoji(data.city.country)}")
         binding.tvDate.text = data.list[0].dt_txt.split(" ")[0]
         loadImage(binding.imgCurrent, data.list[0].weather[0].icon, R.drawable.d02)
 
@@ -151,4 +215,46 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
+    private fun checkPermission() = ActivityCompat.checkSelfPermission(
+        requireContext(), Manifest.permission.ACCESS_FINE_LOCATION
+    ) == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
+        requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION
+    ) == PackageManager.PERMISSION_GRANTED
+
+    private fun requestPermissions() {
+        requestPermissions(
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
+            ), LOCATION_PERMISSION_ID
+        )
+        updateLocation()
+    }
+
+    private fun updateLocation() {
+        if (checkPermission()) {
+            fusedClient.requestLocationUpdates(
+                LocationRequest.Builder(0).apply {
+                    setPriority(Priority.PRIORITY_HIGH_ACCURACY)
+                }.build(), locationCallback, Looper.myLooper()
+            )
+        }
+    }
+
+    private fun saveSetting(preferences: SharedPreferences, key: String, value: String) {
+        val editor = preferences.edit()
+        editor.putString(key, value)
+        editor.apply()
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray,
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == LOCATION_PERMISSION_ID) if (grantResults[0] == PackageManager.PERMISSION_GRANTED) updateLocation()
+    }
+
 }

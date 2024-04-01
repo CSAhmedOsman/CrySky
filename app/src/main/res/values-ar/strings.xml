@@ -38,5 +38,9 @@
     <string name="language">اللغة</string>
     <string name="arabic">العربية</string>
     <string name="english">الإنجليزية</string>
+    <string name="goto_home">الانتقال إلى الرئيسية</string>
+    <string name="delete_confirm">هل أنت متأكد أنك تريد حذف, %1$s!</string>
+    <string name="delete">حذف</string>
+    <string name="weatherDisc">حالة الطقس في, %1$s!</string>
 
 </resources>

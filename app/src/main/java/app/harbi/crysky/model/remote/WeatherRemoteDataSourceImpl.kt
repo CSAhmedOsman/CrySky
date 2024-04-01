@@ -2,7 +2,6 @@ package app.harbi.crysky.model.remote
 
 import app.harbi.crysky.model.data.CityResponse
 import app.harbi.crysky.model.data.WeatherResponse
-import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.emitAll
@@ -14,9 +13,9 @@ class WeatherRemoteDataSourceImpl(
 ) : WeatherRemoteDataSource {
 
     override fun getWeather(
-        latLng: LatLng, units: String, language: String,
+        city: CityResponse, units: String, language: String,
     ): Flow<WeatherResponse> = flow {
-        val response = weatherService.getWeather(latLng.latitude, latLng.longitude, units, language)
+        val response = weatherService.getWeather(city.latitude, city.longitude, units, language)
         if (response.isSuccessful) {
             val weather = response.body() ?: WeatherResponse()
             emit(weather)

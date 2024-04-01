@@ -10,7 +10,12 @@ import app.harbi.crysky.model.data.CityResponse
 import app.harbi.crysky.model.getFlagEmoji
 import app.harbi.crysky.ui.home.view.home.ViewHolder
 
-class CityAdapter(val itemClick: (CityResponse) -> Unit, val addFav: (CityResponse) -> Unit) :
+class CityAdapter(
+    private val brnSrc: Int,
+    private val itemClick: (CityResponse) -> Unit,
+    private val addFav: (CityResponse) -> Unit,
+    private val goToForward: (CityResponse) -> Unit,
+) :
     ListAdapter<CityResponse, ViewHolder<ItemCityBinding>>(CityDiffUtil()) {
 
     private lateinit var binding: ItemCityBinding
@@ -29,18 +34,26 @@ class CityAdapter(val itemClick: (CityResponse) -> Unit, val addFav: (CityRespon
         holder.binding.apply {
             tvCityName.text = item.name
             tvCountryCode.text = String.format("${item.country} ${getFlagEmoji(item.country)}")
-            btnAddToFavorites.setOnClickListener { addFav(item) }
+            btnAdd.setImageResource(brnSrc)
+            btnAdd.setOnClickListener { addFav(item) }
+            btnGoToForward.setOnClickListener { goToForward(item) }
             itemView.setOnClickListener { itemClick(item) }
         }
     }
 }
 
 class CityDiffUtil : DiffUtil.ItemCallback<CityResponse>() {
-    override fun areItemsTheSame(oldItem: CityResponse, newItem: CityResponse): Boolean {
+    override fun areItemsTheSame(
+        oldItem: CityResponse,
+        newItem: CityResponse,
+    ): Boolean {
         return (oldItem.longitude == newItem.longitude) && (oldItem.latitude == newItem.latitude)
     }
 
-    override fun areContentsTheSame(oldItem: CityResponse, newItem: CityResponse): Boolean {
+    override fun areContentsTheSame(
+        oldItem: CityResponse,
+        newItem: CityResponse,
+    ): Boolean {
         return oldItem == newItem
     }
 }

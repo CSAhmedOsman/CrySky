@@ -4,13 +4,14 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import app.harbi.crysky.model.data.CityResponse
-import app.harbi.crysky.model.data.WeatherResponseEntity
+import app.harbi.crysky.model.data.WeatherResponse
 
-@Database(entities = [WeatherResponseEntity::class, CityResponse::class], version = 2)
+@Database(entities = [WeatherResponse::class, CityResponse::class], version = 4)
+@TypeConverters(Converters::class)
 abstract class WeatherDatabase : RoomDatabase() {
     abstract fun weatherResponseDao(): WeatherResponseDao
-    abstract fun cityResponseDao(): CityResponseDao
 
     companion object {
         @Volatile
@@ -18,7 +19,11 @@ abstract class WeatherDatabase : RoomDatabase() {
         fun getInstance(ctx: Context): WeatherDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance =
-                    Room.databaseBuilder(ctx, WeatherDatabase::class.java, "weather_db").build()
+                    Room.databaseBuilder(
+                        ctx.applicationContext,
+                        WeatherDatabase::class.java,
+                        "weather_db"
+                    ).build()
                 INSTANCE = instance
                 instance
             }

@@ -2,7 +2,19 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="CityDAOTest">
+        <State />
+      </entry>
+      <entry key="DAOTest">
+        <State />
+      </entry>
       <entry key="app">
+        <State />
+      </entry>
+      <entry key="insertCityToFav_getCityFromFav_returnTrue()">
+        <State />
+      </entry>
+      <entry key="insertCity_getFavCity_returnTrue()">
         <State />
       </entry>
     </value>

@@ -36,14 +36,28 @@
             tools:text="cityName" />
 
         <ImageButton
-            android:id="@+id/btnAddToFavorites"
+            android:id="@+id/btnAdd"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/add_fav"
+            android:padding="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnGoToForward"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/tvCityName"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_favorite" />
+
+        <ImageButton
+            android:id="@+id/btnGoToForward"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_margin="8dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/add_fav"
+            android:contentDescription="@string/goto_home"
             android:padding="12dp"
-            android:src="@drawable/ic_favorite"
+            android:src="@drawable/ic_forward"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"

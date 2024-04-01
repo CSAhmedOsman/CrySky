@@ -1,36 +1,37 @@
 package app.harbi.crysky.model.local
 
 import app.harbi.crysky.model.data.CityResponse
-import app.harbi.crysky.model.data.WeatherResponseEntity
+import app.harbi.crysky.model.data.WeatherResponse
 import kotlinx.coroutines.flow.Flow
 
-class WeatherLocalDataSourceImpl(
-    private val weatherResponseDao: WeatherResponseDao,
-    private val cityResponseDao: CityResponseDao,
-) : WeatherLocalDataSource {
+class WeatherLocalDataSourceImpl(private val dao: WeatherResponseDao) : WeatherLocalDataSource {
 
-    override fun getWeatherResponse(): Flow<WeatherResponseEntity> {
-        return weatherResponseDao.getWeatherResponse()
+    override fun getWeatherResponse(): Flow<List<WeatherResponse>> {
+        return dao.getWeatherResponse()
     }
 
-    override suspend fun insertWeatherResponse(weatherResponse: WeatherResponseEntity) {
-        weatherResponseDao.insertWeatherResponse(weatherResponse)
+    override suspend fun insertWeatherResponse(weatherResponse: WeatherResponse) {
+        dao.insertWeatherResponse(weatherResponse)
     }
 
     override suspend fun deleteWeatherResponse() {
-        weatherResponseDao.deleteWeatherResponse()
+        dao.deleteWeatherResponse()
     }
 
-    override fun getCityResponse(): Flow<CityResponse> {
-        return cityResponseDao.getCityResponse()
+    override fun getFavCityResponse(): Flow<List<CityResponse>> {
+        return dao.getFavCityResponse()
+    }
+
+    override fun getAlertCityResponse(): Flow<List<CityResponse>> {
+        return dao.getAlertCityResponse()
     }
 
     override suspend fun insertCityResponse(cityResponse: CityResponse) {
-        cityResponseDao.insertCityResponse(cityResponse)
+        dao.insertCityResponse(cityResponse)
     }
 
     override suspend fun deleteCityResponse(cityResponse: CityResponse) {
-        cityResponseDao.deleteCityResponse(cityResponse)
+        dao.deleteCityResponse(cityResponse)
     }
 
 }

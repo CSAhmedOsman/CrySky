@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,124 +7,129 @@
     android:background="@drawable/gradient_shape_90"
     tools:context=".ui.home.view.settings.SettingsFragment">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="32dp"
-        android:text="@string/setting"
-        android:textSize="32sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-
-    <TextView
-        android:id="@+id/textViewLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="24dp"
-        android:text="@string/location"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <RadioGroup
-        android:id="@+id/radioGroupLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="@+id/textViewLocation"
-        app:layout_constraintTop_toBottomOf="@+id/textViewLocation">
-
-        <RadioButton
-            android:id="@+id/radioButtonGPS"
+        <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/gps"
-            android:textSize="16sp" />
+            android:layout_margin="32dp"
+            android:text="@string/setting"
+            android:textSize="32sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <RadioButton
-            android:id="@+id/radioButtonMap"
+
+        <TextView
+            android:id="@+id/textViewLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/map"
-            android:textSize="16sp" />
-    </RadioGroup>
+            android:layout_margin="24dp"
+            android:text="@string/location"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <TextView
-        android:id="@+id/textViewUnits"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="24dp"
-        android:text="@string/units"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroupLocation" />
-
-    <RadioGroup
-        android:id="@+id/radioGroupUnits"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="@+id/textViewUnits"
-        app:layout_constraintTop_toBottomOf="@+id/textViewUnits">
-
-        <RadioButton
-            android:id="@+id/radioButtonStandard"
+        <RadioGroup
+            android:id="@+id/radioGroupLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/standard"
-            android:textSize="16sp" />
+            android:layout_margin="8dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="@+id/textViewLocation"
+            app:layout_constraintTop_toBottomOf="@+id/textViewLocation">
 
-        <RadioButton
-            android:id="@+id/radioButtonMetric"
+            <RadioButton
+                android:id="@+id/radioButtonGPS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gps"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/radioButtonMap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/map"
+                android:textSize="16sp" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textViewUnits"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/metric"
-            android:textSize="16sp" />
+            android:layout_margin="24dp"
+            android:text="@string/units"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroupLocation" />
 
-        <RadioButton
-            android:id="@+id/radioButtonImperial"
+        <RadioGroup
+            android:id="@+id/radioGroupUnits"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/imperial"
-            android:textSize="16sp" />
-    </RadioGroup>
+            android:layout_margin="8dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="@+id/textViewUnits"
+            app:layout_constraintTop_toBottomOf="@+id/textViewUnits">
 
-    <TextView
-        android:id="@+id/textViewLanguage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="24dp"
-        android:text="@string/language"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroupUnits" />
+            <RadioButton
+                android:id="@+id/radioButtonStandard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/standard"
+                android:textSize="16sp" />
 
-    <RadioGroup
-        android:id="@+id/radioGroupLanguage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="@+id/textViewLanguage"
-        app:layout_constraintTop_toBottomOf="@+id/textViewLanguage">
+            <RadioButton
+                android:id="@+id/radioButtonMetric"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/metric"
+                android:textSize="16sp" />
 
-        <RadioButton
-            android:id="@+id/radioButtonArabic"
+            <RadioButton
+                android:id="@+id/radioButtonImperial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/imperial"
+                android:textSize="16sp" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textViewLanguage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/arabic"
-            android:textSize="16sp" />
+            android:layout_margin="24dp"
+            android:text="@string/language"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroupUnits" />
 
-        <RadioButton
-            android:id="@+id/radioButtonEnglish"
+        <RadioGroup
+            android:id="@+id/radioGroupLanguage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/english"
-            android:textSize="16sp" />
-    </RadioGroup>
+            android:layout_margin="8dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="@+id/textViewLanguage"
+            app:layout_constraintTop_toBottomOf="@+id/textViewLanguage">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <RadioButton
+                android:id="@+id/radioButtonArabic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/arabic"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/radioButtonEnglish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/english"
+                android:textSize="16sp" />
+        </RadioGroup>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

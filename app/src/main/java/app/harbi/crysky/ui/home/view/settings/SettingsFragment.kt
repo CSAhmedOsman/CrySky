@@ -4,13 +4,14 @@ import android.Manifest
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
+import androidx.core.os.LocaleListCompat
 import androidx.fragment.app.Fragment
 import app.harbi.crysky.databinding.FragmentSettingsBinding
 import app.harbi.crysky.model.Constants
@@ -20,7 +21,6 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
-import java.util.Locale
 
 class SettingsFragment : Fragment() {
 
@@ -183,14 +183,8 @@ class SettingsFragment : Fragment() {
                 updateLocation()
     }
 
-    private fun setLocale(languageCode: String) {
-        val locale = Locale(languageCode)
-        Locale.setDefault(locale)
-
-        val config = Configuration()
-        config.locale = locale
-        resources.updateConfiguration(config, resources.displayMetrics)
-
-        requireActivity().recreate()
+    private fun setLocale(lan: String) {
+        val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(lan)
+        AppCompatDelegate.setApplicationLocales(appLocale)
     }
 }

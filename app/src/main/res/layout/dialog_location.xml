@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:checkedButton="@+id/radio_gps"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/btn_save"
+        app:layout_constraintBottom_toTopOf="@+id/btn_delete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="parent">
@@ -47,7 +47,7 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/btn_save"
+        android:id="@+id/btn_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -62,9 +62,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cancel"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_save"
-        app:layout_constraintEnd_toStartOf="@+id/btn_save"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_delete"
+        app:layout_constraintEnd_toStartOf="@+id/btn_delete"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btn_save" />
+        app:layout_constraintTop_toTopOf="@+id/btn_delete" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,11 +2,10 @@ package app.harbi.crysky.model.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "weather_response")
+@Entity(tableName = "weather_response", primaryKeys = ["lat", "lon"])
 data class WeatherResponseEntity(
-    @PrimaryKey(autoGenerate = true)
-    val id: Long = 0,
     val cod: String = "",
     val message: Double = 0.0,
     val cnt: Int = 0,
@@ -46,26 +45,33 @@ data class WeatherResponseEntity(
 //    val city: City = City(),
     val name: String = "",
 //    val coord: Coord = Coord(),
+    //@SerializedName("latitude")
     val lat: Double = 0.0,
+    //@SerializedName("longitude")
     val lon: Double = 0.0,
     val country: String = "",
     val population: Int = 0,
     val timezone: Int = 0,
     val sunrise: Long = 0,
     val sunset: Long = 0,
+    @SerializedName("is_capital") val isCapital: Boolean = false,
 )
 
-@Entity(tableName = "city_response", primaryKeys = ["latitude", "longitude"])
+@Entity(tableName = "city_response", primaryKeys = ["latitude", "longitude", "type"])
 data class CityResponse(
     val name: String = " ",
     val latitude: Double = 0.0,
     val longitude: Double = 0.0,
     val country: String = "",
-    val population: Int = 0,
-    val isCapital: Boolean = false,
+
+    var time: String = "",
+    var type: String = "",
 )
 
+@Entity(tableName = "weather_response")
 data class WeatherResponse(
+    @PrimaryKey(autoGenerate = true)
+    val id: Long = 0,
     val cod: String = "",
     val message: Double = 0.0,
     val cnt: Int = 0,

@@ -2,23 +2,21 @@ package app.harbi.crysky.model.repository
 
 import app.harbi.crysky.model.data.CityResponse
 import app.harbi.crysky.model.data.WeatherResponse
-import app.harbi.crysky.model.data.WeatherResponseEntity
 import app.harbi.crysky.model.local.WeatherLocalDataSource
 import app.harbi.crysky.model.remote.WeatherRemoteDataSource
-import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.flow.Flow
 
 class WeatherRepositoryImpl(
-    val remoteDataSource: WeatherRemoteDataSource,
-    val localDataSource: WeatherLocalDataSource,
+    private val remoteDataSource: WeatherRemoteDataSource,
+    private val localDataSource: WeatherLocalDataSource,
 ) : WeatherRepository {
     override fun getRemoteWeather(
-        latLng: LatLng, units: String, language: String,
+        city: CityResponse, units: String, language: String,
     ): Flow<WeatherResponse> {
-        return remoteDataSource.getWeather(latLng, units, language)
+        return remoteDataSource.getWeather(city, units, language)
     }
 
-    override fun getLocalWeather(): Flow<WeatherResponseEntity> {
+    override fun getLocalWeather(): Flow<List<WeatherResponse>> {
         return localDataSource.getWeatherResponse()
     }
 
@@ -26,19 +24,7 @@ class WeatherRepositoryImpl(
         return remoteDataSource.getCities(name)
     }
 
-    override fun getLocalCities(): Flow<CityResponse> {
-        return localDataSource.getCityResponse()
-    }
-
-    override suspend fun insertCity(cityResponse: CityResponse) {
-        localDataSource.insertCityResponse(cityResponse)
-    }
-
-    override suspend fun deleteCity(cityResponse: CityResponse) {
-        localDataSource.deleteCityResponse(cityResponse)
-    }
-
-    override suspend fun insertWeather(weatherResponse: WeatherResponseEntity) {
+    override suspend fun insertWeather(weatherResponse: WeatherResponse) {
         localDataSource.insertWeatherResponse(weatherResponse)
     }
 
@@ -46,4 +32,19 @@ class WeatherRepositoryImpl(
         localDataSource.deleteWeatherResponse()
     }
 
+    override fun getFavCityResponse(): Flow<List<CityResponse>> {
+        return localDataSource.getFavCityResponse()
+    }
+
+    override fun getAlertCityResponse(): Flow<List<CityResponse>> {
+        return localDataSource.getAlertCityResponse()
+    }
+
+    override suspend fun insertCityResponse(cityResponse: CityResponse) {
+        localDataSource.insertCityResponse(cityResponse)
+    }
+
+    override suspend fun deleteCityResponse(cityResponse: CityResponse) {
+        localDataSource.deleteCityResponse(cityResponse)
+    }
 }

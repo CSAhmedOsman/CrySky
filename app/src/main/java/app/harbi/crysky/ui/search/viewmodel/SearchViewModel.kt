@@ -29,10 +29,9 @@ class SearchViewModel(private val repository: WeatherRepository) : ViewModel() {
         }
     }
 
-    fun addFavCity(cityResponse: CityResponse) {
+    fun addCity(cityResponse: CityResponse) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.insertCity(cityResponse)
+            repository.insertCityResponse(cityResponse)
         }
     }
-
 }
